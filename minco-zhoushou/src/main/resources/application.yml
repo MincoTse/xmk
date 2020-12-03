@@ -1,0 +1,26 @@
+server:
+  port: 8061
+spring:
+  profiles:
+    active: dev
+
+mybatis-plus:
+  type-aliases-package: com.minco.zhushou.entity
+  mapper-locations: classpath*:mapper/*.xml
+  global-config:
+    db-config:
+      table-prefix: tse_
+
+
+qyx:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://sql-t01cn-rw.svc.53zaixian.com:3306/__db.name__?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=GMT%2B8
+    username: app_test
+    password: quWxRxYv1GzB%1iy
+  server:
+    type: service
+db:
+  name:
+    - db-name: member_center_0
+

@@ -1,0 +1,22 @@
+<a-result :title="'人生倒计时'+title">
+    <template #icon>
+        <a-icon type="smile" theme="twoTone"/>
+    </template>
+    <template #extra>
+        <a-button type="primary">
+            小城故事
+        </a-button>
+    </template>
+</a-result>
+
+<script>
+
+    new Vue({
+        el: '#mid_content',
+        data: function () {
+            return {
+                title: moment().format('YYYY-MM-DD HH:mm:ss'),
+            }
+        }
+    })
+</script>

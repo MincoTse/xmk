@@ -1,0 +1,75 @@
+<el-row :gutter="10" style="margin: 0px">
+    <el-col :xs="2" :sm="4" :md="6" :lg="8" :xl="8">&nbsp;</el-col>
+    <el-col :xs="20" :sm="16" :md="12" :lg="8" :xl="8">
+        <div style="background: rgb(255, 255, 255);margin-top:20px;padding: 50px;box-shadow: #f1f4f9 1px 2px 3px 5px;">
+            <p style="padding-bottom: 10px;border-bottom: 1px antiquewhite solid;margin: 0px;">
+                配置账号权限：<span style="color: red">{{ userName }}</span>
+            </p>
+            <el-tree style="padding-top: 5px;" :data="parents" show-checkbox default-expand-all node-key="id"
+                     :expand-on-click-node="false" ref="permmsionTree">
+              <span style="flex: 1;display: flex;align-items: center;justify-content: space-between;font-size: 14px;padding-right: 8px;"
+                    slot-scope="{ node, data }">
+                <span>{{ node.label }}</span>
+                <span>
+                    &nbsp;
+                </span>
+              </span>
+            </el-tree>
+            <div style="display: flex;justify-content: flex-end;margin: 30px 25px 0px 0px;">
+                <el-button type="primary" size="medium" @click="updateFn">保存本次修改</el-button>
+            </div>
+
+        </div>
+    </el-col>
+    <el-col :xs="2" :sm="4" :md="6" :lg="8" :xl="8">&nbsp;</el-col>
+</el-row>
+
+<script>
+
+    var object = my.conversionInitDataFn('[[${object}]]');
+    var checkers = object.checkers;
+    var content = new Vue({
+        el: '#mid_content',
+        data: function () {
+            return {
+                parents: object.parents,
+                userId: object.userId,
+                userName: object.userName,
+            }
+        },
+        methods: {
+            initDataFn() {
+                //初始化树形选中节点
+                this.$refs.permmsionTree.setCheckedKeys(checkers);
+            },
+            updateFn() {
+                //保存设置
+                var _this = this;
+                var param = {
+                    "checkers": _this.$refs.permmsionTree.getCheckedKeys(),
+                    "halfCheckers": _this.$refs.permmsionTree.getHalfCheckedKeys(),
+                    "userId": _this.userId
+                }
+                axios.post("/backUser/saveOrUpdate", param).then(function (response) {
+                    if (response.code == "0") {
+                        _this.$notify({
+                            title: '权限修改',
+                            message: "修改成功",
+                            type: 'success'
+                        });
+                        my.gotoPage(config.backUserPageUrl);
+                    } else {
+                        _this.$notify({
+                            title: '权限修改',
+                            message: response.message,
+                            type: 'error'
+                        });
+                    }
+                })
+            }
+        },
+        mounted() {
+            this.initDataFn();
+        },
+    })
+</script>

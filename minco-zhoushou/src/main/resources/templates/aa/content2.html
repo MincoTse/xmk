@@ -1,0 +1,29 @@
+
+<a-checkbox-group :options="optionsWithDisabled" @change="onChange">
+    <span slot="value" slot-scope="{ label }" style="color: red">{{ label }}</span>
+</a-checkbox-group>
+
+
+
+<script>
+
+    //value label不能动
+    var optionsWithDisabled = [
+        { value:'1',label: '1Apple' },
+        { value: '2', label: '2Pear' },
+        { value: '3', label: '3Orange'},
+    ];
+    var vm = new Vue({
+        el: '#mid_content',
+        data: function () {
+            return {
+                optionsWithDisabled,
+            }
+        },
+        methods: {
+            onChange(checkedValues) {
+                console.log('checked = ', checkedValues);
+            },
+        },
+    })
+</script>

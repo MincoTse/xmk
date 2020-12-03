@@ -1,0 +1,137 @@
+<div>
+    <a-form-model layout="inline">
+        <a-form-model-item label="名称">
+            <a-input v-model="search.name" placeholder="please name..." allow-clear></a-input>
+        </a-form-model-item>
+        <a-form-model-item label="性别">
+            <a-select v-model="search.gender" placeholder="请选择" allow-clear style="width: 100px">
+                <a-select-option value="male">
+                    男
+                </a-select-option>
+                <a-select-option value="female">
+                    女
+                </a-select-option>
+            </a-select>
+        </a-form-model-item>
+        <a-form-model-item>
+            <a-button type="primary" @click="handleTableChange">
+                搜 索
+            </a-button>
+        </a-form-model-item>
+    </a-form-model>
+</div>
+<a-divider dashed></a-divider>
+<div>
+    <a-table :columns="columns" :data-source="data"
+             :row-key="record => record.login.uuid"
+             :pagination="pagination"
+             :loading="loading"
+             @change="handleTableChange">
+        <span slot="seq" slot-scope="text, record, index"> {{ index + 1 }}</span>
+        <template slot="picture" slot-scope="picture">
+            <a-avatar :size="45" :src="picture.medium"></a-avatar>
+        </template>
+        <span slot="customTitle"><a-icon type="smile-o"></a-icon> 名-姓</span>
+        <template slot="name" slot-scope="text"> {{ text.first }} {{ text.last }}</template>
+    </a-table>
+</div>
+
+
+<script>
+    var columns = [
+
+        {
+            title: '序号',
+            width: '5%',
+            scopedSlots: {customRender: 'seq'},
+        },
+        {
+            dataIndex: 'picture',
+            width: '5%',
+            //<span slot="customTitle"><a-icon type="smile-o"></a-icon> 名-姓</span>
+            //对列的名称的处理
+            slots: {title: 'customTitle'},
+            //队列的值的处理
+            scopedSlots: {customRender: 'picture'},
+        },
+        {
+            title: "姓名",
+            align: 'center',
+            dataIndex: 'name',
+            width: '10%',
+            scopedSlots: {customRender: 'name'},
+        },
+        {
+            title: '性别',
+            dataIndex: 'gender',
+            filters: [
+                {text: 'Male', value: 'male'},
+                {text: 'Female', value: 'female'},
+            ],
+            width: '10%',
+        },
+        {
+            title: 'Email',
+            dataIndex: 'email',
+        },
+    ];
+
+    var vm = new Vue({
+        el: '#mid_content',
+        data: function () {
+            return {
+                search: {
+                    gender: '',
+                    name: '',
+                },
+                locales: window.antd.locales,
+                collapsed: false,
+                data: [],
+                pagination: {
+                    pageSize: 6,
+                    current: 1,
+                    total: 0,
+                },
+                loading: false,
+                columns,
+            }
+        },
+        mounted() {
+            this.fetch({results: this.pagination.pageSize});
+        },
+        methods: {
+            handleTableChange(pagination, filters, sorter) {
+                // console.log("handleTableChange pagination.pageSize------------" + pagination.pageSize)
+                // let search = {}
+                // if (pagination.pageSize) {
+                //     //如果是点击变更页码的事件在更新页面
+                //     console.log("handleTableChange------------")
+                //     console.log(pagination)
+                //     this.pagination = pagination
+                // }
+                // else{
+                //
+                //     this.pagination.current = 1
+                // }
+
+                this.fetch({
+                    results: this.pagination.pageSize,
+                    // page: this.pagination.current,
+                    // ...this.search,
+                })
+            },
+            fetch(params = {}) {
+                console.log("fetch params-----" + JSON.stringify(params))
+                this.loading = true;
+                axios.get("https://randomuser.me/api", {
+                    params: params
+                }).then(res => {
+                    this.loading = false;
+                    this.pagination.total = 200;
+                    this.data = res.data.results;
+                })
+            }
+        }
+    })
+
+</script>

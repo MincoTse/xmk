@@ -1,0 +1,124 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%
+}
+
+/*布局所用样式*/
+.el-header {
+    padding: 0px;
+    color: #333;
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.el-header_div {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    font-size: 12px;
+}
+
+.el-header_div_left {
+    height: 40px;
+    padding: 5px 10px;
+    flex-flow: row nowrap;
+}
+
+#mid_page .el-header .el-row {
+    box-shadow: 0 4px 7px rgba(73, 80, 88, 0.2);
+    z-index: 5;
+    padding-left: 15px;
+    background: white;
+    height: 46px;
+}
+
+/* 左侧菜单样式*/
+.el-menu {
+    border-right: none;
+}
+
+.el-container .mclass_container {
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.el-aside {
+    color: #333;
+    border-right: #e6e6e6 solid 1px;
+    overflow-x: hidden;
+}
+
+/* 右边内容区 样式 */
+.mclass_main {
+    /*overflow:auto;*/
+    /*overflow: hidden;*/
+    padding: 0;
+    background: rgb(247, 247, 247);
+}
+
+/* 列表页面所用的样式 */
+.main_list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.main_list_header {
+    margin-bottom: 10px;
+    box-shadow: #ebeef5 10px 2px 4px 7px;
+}
+
+.main_list_header_tool {
+    height: 50px;
+    padding-top: 5px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #ffffff;
+}
+
+.main_list_header_tool > div {
+    margin: 0px 10px;
+}
+
+.main_list_center {
+    margin: 10px;
+    background-color: #ffffff
+}
+
+.main_list_center_query {
+    padding: 9px 15px 0px;
+    border-bottom-style: inset;
+}
+
+.main_list_center_table {
+    /*width: 100%;*/
+    /*!* 不显示相邻元素的滚动条 *!*/
+    /*box-sizing: border-box;*/
+}
+
+.main_list_bootom {
+    height: 55px;
+    padding-right: 5%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.el-table .warning-row {
+    background: oldlace;
+}
+
+.el-table .success-row {
+    background: #f0f9eb;
+}
+
+.el-table .gray-row {
+    background: #cacdd0;
+}

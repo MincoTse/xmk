@@ -1,0 +1,114 @@
+<div id="main_list" class="main_list">
+    <div class="main_list_center">
+        <div id="main_list_center_query" class="main_list_center_query">
+            <a-form  layout="inline"  :model="search">
+                <a-form-item label="用户状态">
+                    <a-select v-model="search.status" style="width: 200px">
+                        <a-select-option v-for="item in statusTypeEnum" :key="item.type">
+                            {{ item.text }}
+                        </a-select-option>
+                    </a-select>
+                </a-form-item>
+                <a-form-item label="Field B">
+                    <a-input placeholder="input placeholder" />
+                </a-form-item>
+                <a-form-item >
+                    <a-button type="primary" @click="searchFn">查询</a-button>
+                </a-form-item>
+                <a-form-item >
+                    <a-button type="primary" @click="clearFn">清空</a-button>
+                </a-form-item>
+            </a-form>
+        </div>
+        <div>
+            <a-table id="main_list_table" bordered :columns="myColumns"  :data-source="list">
+<!--                      :loading="loading"-->
+                     @change="handleTableChange">
+                <a slot="name" slot-scope="text">{{ text }}</a>
+                <span slot="action" slot-scope="text">
+                  <a>Invite 一 {{ text.userName }}</a>
+                  <a-divider type="vertical" />
+                  <a>Delete</a>
+                </span>
+            </a-table>
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+    var columns = [
+        {
+            title: "姓名",
+            dataIndex: 'userName',
+            slots: { title: 'customTitle' },
+            scopedSlots: { customRender: 'name' },
+        },
+        {
+            title: '状态',
+            dataIndex: 'userStatus',
+        },
+        {
+            title: '最后一次登录时间',
+            dataIndex: 'updateTime',
+        },
+        {
+            title: '操作',
+            key: 'action',
+            scopedSlots: { customRender: 'action' },
+        },
+    ];
+    var object = my.conversionInitDataFn('[[${object}]]');
+    console.log(object);
+    var content = new Vue({
+        el: '#main_list',
+        data: function () {
+            return {
+                pageSize: 0,
+                currentPage: 0,
+                totalSize: 0,
+                search: {},
+                list: object.records,
+                statusTypeEnum:object.enums.userStatusEnum,
+                myColumns:columns,
+            }
+        },
+        methods: {
+            searchDataInit() {
+                let size = object.size;
+                let page = object.current;
+                console.log(size + " ---------"+ page)
+                this.search = {
+                    status: '',
+                    current: page,
+                    size: size
+                };
+                this.currentPage = page;
+                this.pageSize = size;
+            },
+            queryFn() {
+                var cur = this;
+                axios.post("/backUser/search", cur.search).then(function (response) {
+                    cur.list = response.data.records;
+                    cur.totalPage = parseInt(response.data.total);
+                })
+            },
+            handleCurrentChangeFn() {
+                this.search.current = this.currentPage;
+                this.queryFn();
+            },
+            searchFn() {
+                this.search.current = 1;
+                this.queryFn();
+            },
+            clearFn() {
+                this.searchDataInit();
+                this.queryFn();
+            }
+        },
+        mounted() {
+            this.searchDataInit();
+        },
+    })
+</script>

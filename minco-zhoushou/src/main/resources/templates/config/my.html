@@ -1,0 +1,38 @@
+<el-row :gutter="10" style="margin: 0px">
+    <el-col :xs="7" :sm="6" :md="5" :lg="4" :xl="4">&nbsp;</el-col>
+    <el-col :xs="10" :sm="12" :md="14" :lg="16" :xl="16">
+        <div style="background: rgb(255, 255, 255);margin-top: 50px;padding: 50px 50px 180px 50px;box-shadow: #f1f4f9 1px 2px 3px 5px;">
+            <div>
+                姓名：{{ userName }}
+                <br><br>
+            </div>
+            <!-- 显示当前用户权限 -->
+            <div v-for="parent in parentOptions">
+                {{ parent.label }}
+                <br>
+                <br>
+                <el-checkbox-group v-model="checkeds">
+                    <el-checkbox v-for="child in parent.children" disabled :label="child.id">{{ child.label }}
+                    </el-checkbox>
+                </el-checkbox-group>
+                <br>
+            </div>
+        </div>
+    </el-col>
+    <el-col :xs="7" :sm="6" :md="5" :lg="4" :xl="4">&nbsp;</el-col>
+</el-row>
+<a-checkbox-group v-model="checkedList" :options="plainOptions" @change="onChange" />
+
+
+<script>
+    var object = my.conversionInitDataFn('[[${object}]]');
+    var vm = new Vue({
+        el: '#mid_content',
+        data: function () {
+            return {
+                parentOptions: object.parents,
+                checkedList: object.checkedList,
+            }
+        }
+    })
+</script>

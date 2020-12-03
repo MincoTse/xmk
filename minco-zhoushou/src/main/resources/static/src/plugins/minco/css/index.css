@@ -1,0 +1,44 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%
+}
+
+/*布局所用样式*/
+.el-header {
+    padding: 0px;
+    color: #333;
+    /*border-bottom: 1px solid #e6e6e6;*/
+}
+
+#mid_page .el-header .el-row {
+    box-shadow: 0 4px 7px rgba(73, 80, 88, 0.2);
+    z-index: 5;
+    padding-left: 15px;
+    background: white;
+    height: 46px;
+}
+
+.el-menu {
+    border-right: none;
+}
+
+.el-container .mclass_container {
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.el-aside {
+    color: #333;
+    border-right: #e6e6e6 solid 1px;
+    overflow-x: hidden;
+}
+
+.mclass_main {
+    /*overflow:auto;*/
+    /*overflow: hidden;*/
+    background: #fafafa;
+}
