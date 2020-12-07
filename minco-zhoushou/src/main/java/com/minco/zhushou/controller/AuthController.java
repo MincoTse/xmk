@@ -1,11 +1,11 @@
 package com.minco.zhushou.controller;
 
 import com.minco.zhushou.entity.User;
-import com.minco.zhushou.param.request.AuthLoginREQ;
-import com.minco.zhushou.param.vo.IndexRspVO;
-import com.minco.zhushou.param.vo.MenuVO;
-import com.minco.zhushou.param.vo.UserInfoVO;
-import com.minco.zhushou.service.ResourceService;
+import com.minco.zhushou.param.request.AuthLoginReq;
+import com.minco.zhushou.vo.IndexRspVO;
+import com.minco.zhushou.vo.ResourceVO;
+import com.minco.zhushou.vo.UserInfoVO;
+import com.minco.zhushou.service.BackResourceService;
 import com.minco.zhushou.service.UserPermissionService;
 import com.minco.zhushou.service.UserService;
 import com.minco.zhushou.utils.JacksonUtils;
@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 〈一句话功能简述〉
@@ -39,7 +38,7 @@ public class AuthController {
     private UserService userService;
 
     @Resource
-    private ResourceService resourceService;
+    private BackResourceService backResourceService;
 
     @Resource
     private UserPermissionService userPermissionService;
@@ -57,7 +56,7 @@ public class AuthController {
      */
     @PostMapping("authentication")
     @ResponseBody
-    public Result login(@RequestBody AuthLoginREQ loginVo) {
+    public Result login(@RequestBody AuthLoginReq loginVo) {
         //Assert.isBlank(loginVo.getUsername(), CodeMessageEnum.User.user_name_is_blank);
         //Assert.isBlank(loginVo.getPassword(), CodeMessageEnum.User.user_pwd_is_blank);
         //
@@ -84,15 +83,16 @@ public class AuthController {
         User user = userService.getById(userId);
 
         //获取用户权限
-        List<Long> resourceIds = userPermissionService.listUserResourceIds(userId);
-        List<MenuVO> menuVOS = resourceService.listMenu(resourceIds);
+        //List<Long> resourceIds = userPermissionService.listUserResourceIds(userId);
+        //List<ResourceVO> resourceVOS = backResourceService.listMenu(resourceIds);
+        List<ResourceVO> resourceVOS = backResourceService.listMenu();
 
 
         UserInfoVO userInfoVO = new UserInfoVO();
         userInfoVO.setId(user.getId());
         userInfoVO.setName(user.getUserName());
         IndexRspVO indexData = new IndexRspVO();
-        indexData.setMenus(menuVOS);
+        indexData.setMenus(resourceVOS);
         indexData.setUserInfo(userInfoVO);
         String s = JacksonUtils.toString(indexData);
         model.addAttribute("object", s);
@@ -109,17 +109,6 @@ public class AuthController {
     @ResponseBody
     public Result out() {
         return Result.ok();
-    }
-
-    @RequestMapping("/unauthorized")
-    public String unauthorized() {
-        return "error/unAuth";
-    }
-
-    @RequestMapping("/exception")
-    @ResponseBody
-    public Result exception(Map<String, String> map) {
-        return Result.failure(map.get("msg"), map.get("code"));
     }
 
 

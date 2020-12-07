@@ -1,4 +1,4 @@
-package com.minco.zhushou.param.vo;
+package com.minco.zhushou.vo;
 
 import lombok.Data;
 

@@ -13,7 +13,7 @@ import java.util.List;
  * @create 2020/11/23 19:13
  */
 @Data
-public class GiveResourceREQ implements Serializable {
+public class GiveResourceReq implements Serializable {
 
     private List<Long> resourceId;
 

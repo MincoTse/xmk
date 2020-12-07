@@ -1,5 +1,6 @@
 package com.minco.zhushou.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.xmk.common.base.DBaseEntity;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -15,8 +16,9 @@ import java.io.Serializable;
  * @since 2020-11-19 20:17:38
  */
 @Data
+@TableName("t_resource")
 @Accessors(chain = true)
-public class Resource extends DBaseEntity implements Serializable {
+public class BackResource extends DBaseEntity implements Serializable {
 
     private static final long serialVersionUID = 620575284489602104L;
 

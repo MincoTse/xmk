@@ -1,4 +1,4 @@
-package com.minco.zhushou.param.vo;
+package com.minco.zhushou.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

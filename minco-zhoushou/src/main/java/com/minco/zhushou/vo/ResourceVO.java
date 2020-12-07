@@ -1,4 +1,4 @@
-package com.minco.zhushou.param.vo;
+package com.minco.zhushou.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -20,7 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @Builder
-public class MenuVO implements Serializable {
+public class ResourceVO implements Serializable {
 
     @ApiModelProperty("菜单key")
     private Long id;
@@ -35,7 +35,7 @@ public class MenuVO implements Serializable {
     private String apiPath;
 
     @ApiModelProperty("子节点集合")
-    private List<MenuVO> children;
+    private List<ResourceVO> children;
 
 
 

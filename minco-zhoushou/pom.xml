@@ -30,6 +30,7 @@
 			<artifactId>xmk-bsf-jdbc</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<!--数据爬虫 -->
 		<dependency>
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>

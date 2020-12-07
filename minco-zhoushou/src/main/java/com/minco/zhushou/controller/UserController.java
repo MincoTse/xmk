@@ -1,12 +1,16 @@
 package com.minco.zhushou.controller;
 
+import cn.hutool.core.collection.CollUtil;
+import com.alibaba.fastjson.JSONObject;
 import com.minco.zhushou.entity.User;
-import com.minco.zhushou.entity.UserPermission;
 import com.minco.zhushou.param.query.BackUserQuery;
-import com.minco.zhushou.service.ResourceService;
+import com.minco.zhushou.service.BackResourceService;
 import com.minco.zhushou.service.UserPermissionService;
 import com.minco.zhushou.service.UserService;
 import com.minco.zhushou.utils.JacksonUtils;
+import com.minco.zhushou.vo.CheckBoxVO;
+import com.minco.zhushou.vo.ResourceVO;
+import com.minco.zhushou.vo.UserResourceRspVO;
 import com.xmk.common.base.Result;
 import io.swagger.annotations.Api;
 import org.springframework.stereotype.Controller;
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -33,18 +38,8 @@ public class UserController {
     private UserPermissionService userPermissionService;
 
     @Resource
-    private ResourceService resourceService;
+    private BackResourceService backResourceService;
 
-
-    @GetMapping("backUserList")
-    public String aaa(Model model) {
-
-        List<User> list = service.list();
-        String s = JacksonUtils.toString(list);
-        model.addAttribute("object", s);
-
-        return "config/backUserList";
-    }
 
     @GetMapping("init")
     public String init(Map<String, Object> map) {
@@ -63,25 +58,55 @@ public class UserController {
     /**
      * 获取用户信息以及权限信息
      *
-     * @param backUserQuery
      * @return
      */
-    @PostMapping("getInfo")
-    @ResponseBody
-    public Result getInfo(@RequestBody BackUserQuery backUserQuery) {
-
-        return Result.ok();
-    }
-
-    @GetMapping("getResource")
-    public Result getResource() {
+    @GetMapping("show")
+    public String getInfo(Model model) {
         Long userId = 1L;
         User user = service.getById(userId);
-        List<Long> resourceIds = userPermissionService.listUserResourceIds(userId);
+        List<Long> userResourceIds = userPermissionService.listUserResourceIds(userId);
+        List<ResourceVO> resourceVOS = backResourceService.listResourceVO();
 
+        List<CheckBoxVO> list = new ArrayList<>();
+        for (ResourceVO resourceVO : resourceVOS) {
+            CheckBoxVO vo = getBoxVO(resourceVO);
+            list.add(vo);
+        }
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("userResourceIds", userResourceIds);
+        jsonObject.put("options", list);
 
+        model.addAttribute("object", JacksonUtils.toString(jsonObject));
+        return "config/my";
+    }
 
-        return Result.ok();
+    @GetMapping("update")
+    public String getResource(Model model) {
+        Long userId = 1L;
+        User user = service.getById(userId);
+        List<Long> userResourceIds = userPermissionService.listUserResourceIds(userId);
+        List<ResourceVO> resourceVOS = backResourceService.listResourceVO();
+        UserResourceRspVO rspVO = new UserResourceRspVO();
+        rspVO.setResourceList(resourceVOS);
+        rspVO.setUserResourceIds(userResourceIds);
+
+        model.addAttribute("object", JacksonUtils.toString(rspVO));
+        return "config/update";
+    }
+
+    private CheckBoxVO getBoxVO(ResourceVO resourceVO) {
+        CheckBoxVO vo = new CheckBoxVO();
+        vo.setLabel(resourceVO.getLabel());
+        vo.setValue(resourceVO.getId().toString());
+        List<CheckBoxVO> checkBoxVOS = new ArrayList<>();
+        if (CollUtil.isNotEmpty(resourceVO.getChildren())) {
+            for (ResourceVO child : resourceVO.getChildren()) {
+                CheckBoxVO boxVO = getBoxVO(child);
+                checkBoxVOS.add(boxVO);
+            }
+        }
+        vo.setChildren(checkBoxVOS);
+        return vo;
     }
 
 

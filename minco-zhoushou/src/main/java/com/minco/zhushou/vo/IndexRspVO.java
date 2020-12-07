@@ -1,4 +1,4 @@
-package com.minco.zhushou.param.vo;
+package com.minco.zhushou.vo;
 
 import lombok.Data;
 
@@ -16,7 +16,7 @@ public class IndexRspVO {
 
     private UserInfoVO userInfo;
 
-    private List<MenuVO> menus;
+    private List<ResourceVO> menus;
 
 
 }

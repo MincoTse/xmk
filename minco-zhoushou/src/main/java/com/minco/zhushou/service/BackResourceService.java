@@ -1,8 +1,8 @@
 package com.minco.zhushou.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.minco.zhushou.entity.Resource;
-import com.minco.zhushou.param.vo.MenuVO;
+import com.minco.zhushou.entity.BackResource;
+import com.minco.zhushou.vo.ResourceVO;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * @author minco
  * @since 2020-11-19 20:17:38
  */
-public interface ResourceService extends IService<Resource> {
+public interface BackResourceService extends IService<BackResource> {
 
 
     /**
@@ -23,11 +23,12 @@ public interface ResourceService extends IService<Resource> {
      */
     List<Long> listId();
 
+    List<ResourceVO> listResourceVO();
 
-    List<MenuVO> listMenu();
+    List<ResourceVO> listMenu();
 
 
-    List<MenuVO> listMenu(List<Long> resourceIds);
+    List<ResourceVO> listMenu(List<Long> resourceIds);
 
 
 

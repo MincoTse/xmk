@@ -10,7 +10,7 @@ import lombok.Data;
  * @create 2020/11/18 22:07
  */
 @Data
-public class AuthLoginREQ {
+public class AuthLoginReq {
     private String username;
     private String password;
     private String code;
