@@ -29,7 +29,7 @@ import java.util.List;
  * @author 明科
  * @create 2020/11/18 22:02
  */
-@Api(value = "auth", tags = "学员会员接口")
+@Api(value = "auth", tags = "auth接口")
 @Controller
 @RequestMapping("auth")
 public class AuthController {

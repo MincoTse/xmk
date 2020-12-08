@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Api(value = "user", tags = "接口")
+@Api(value = "user", tags = "用户接口")
 @Controller
 @RequestMapping("user")
 public class UserController {

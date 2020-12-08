@@ -16,7 +16,7 @@ import java.io.Serializable;
  * @since 2020-11-19 20:17:38
  */
 @Data
-@TableName("t_resource")
+@TableName("tse_resource")
 @Accessors(chain = true)
 public class BackResource extends DBaseEntity implements Serializable {
 
@@ -30,7 +30,7 @@ public class BackResource extends DBaseEntity implements Serializable {
      * 资源类型
      * @see
      */
-    private String resourceType;
+    private Integer resourceType;
 
     private String resourceUrl;
 
