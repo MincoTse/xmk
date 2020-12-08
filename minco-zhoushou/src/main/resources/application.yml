@@ -1,5 +1,6 @@
 server:
-  port: 8061
+  port: 8062
+
 spring:
   profiles:
     active: dev
@@ -37,4 +38,11 @@ qyx:
 db:
   name:
     - db-name: member_center_0
+
+minco:
+  test:
+    map:
+      12344: 1
+      23123: 2
+      123213f: 3
 
