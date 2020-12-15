@@ -1,5 +1,5 @@
 server:
-  port: 8062
+  port: 8061
 
 spring:
   profiles:
@@ -46,3 +46,7 @@ minco:
       23123: 2
       123213f: 3
 
+
+logging:
+  config: classpath:log4j2.xml
+  register-shutdown-hook: true

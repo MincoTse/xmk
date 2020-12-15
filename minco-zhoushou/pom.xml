@@ -40,6 +40,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>spring-boot-starter-logging</artifactId>
+					<groupId>org.springframework.boot</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -66,6 +72,22 @@
 			<artifactId>fastjson</artifactId>
 		</dependency>
 
+		<!-- log4j2异步打印所需-->
+		<dependency>
+			<groupId>com.lmax</groupId>
+			<artifactId>disruptor</artifactId>
+			<version>3.4.2</version>
+		</dependency>
+		<!-- 引入Log4j2,它集成中spring-boot-starter-log4j2 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.alicp.jetcache</groupId>-->
+<!--			<artifactId>jetcache-starter-redis-springdata</artifactId>-->
+<!--			<version>2.6.0</version>-->
+<!--		</dependency>-->
 		<!-- swagger-->
 		<!-- 引用swagger2开始 -->
 		<dependency>
@@ -85,6 +107,11 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.lionsoul</groupId>
+			<artifactId>ip2region</artifactId>
+			<version>1.7.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
