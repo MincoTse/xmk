@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ant-design-vue@1.7.2/dist/antd.min.css">
+    <style>
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+            background-color: transparent
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: rgba(69, 90, 100, .2);
+            border-radius: 6px
+        }
+
+        .ant-layout {
+            height: 100vh;
+        }
+
+        #layout-frame .trigger {
+            font-size: 18px;
+            line-height: 64px;
+            padding: 0 24px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        #layout-frame .trigger:hover {
+            color: #1890ff;
+        }
+
+        #layout-frame .logo {
+            overflow: hidden;
+            color: #9E9E9E;
+            font-size: 20px;
+            line-height: 44px;
+            font-weight: bold;
+            padding-left: 60px;
+            height: 44px;
+            margin: 10px 15px 10px;
+            background: url("../static/favicon.ico") no-repeat left;
+        }
+
+        #layout-frame .sider-menu {
+            height: calc(100vh - 64px);
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+
+        #layout-frame .layout-header {
+            background: #ffffff;
+            padding: 0;
+            display: flex;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        #layout-frame .layout-context {
+            margin: 24px 16px;
+            padding: 24px;
+            background: #fff;
+        }
+
+        .user-info {
+            padding: 0 12px;
+            transition: all .3s;
+        }
+
+        .user-info:hover {
+            background: rgba(0, 0, 0, .025);
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <a-config-provider :locale="locales.zh_CN">
+        <a-layout id="layout-frame">
+            <a-layout-sider v-model="collapsed" width="250" :collapsedWidth="100">
+                <a-tooltip placement="right" title="后台管理系统">
+                    <div class="logo">
+                        <span>后台管理系统</span>
+                    </div>
+                </a-tooltip>
+                <a-menu class="sider-menu" theme="dark" mode="inline" :default-selected-keys="['1']">
+                    <a-menu-item v-for="n in 3" :key="n">
+                        <a-icon type="user"></a-icon>
+                        <span>会员服务价格设置 {{ n }}</span>
+                    </a-menu-item>
+                </a-menu>
+            </a-layout-sider>
+            <a-layout>
+                <a-layout-header class="layout-header">
+                    <a-icon class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'"
+                            @click="() => (collapsed = !collapsed)">
+                    </a-icon>
+                    <div style="width:100%;display: flex;justify-content: flex-end;line-height: 64px;font-size: 15px">
+                        <a-dropdown trigger="click">
+                            <div class="user-info">
+                            <span style="padding-right: 7px">
+                                <a-avatar :size="45" icon="user" src="https://randomuser.me/api/portraits/men/64.jpg"/>
+                            </span>
+                                <span>xiemingke</span>
+                            </div>
+                            <a-menu slot="overlay">
+                                <a-menu-item>
+                                    <a href="javascript:;">退出</a>
+                                </a-menu-item>
+                            </a-menu>
+                        </a-dropdown>
+
+                    </div>
+                </a-layout-header>
+                <a-layout-content class="layout-context" style="minHeight:auto;">
+
+                    <a-tree
+                            v-model="checkedKeys"
+                            :auto-expand-parent="autoExpandParent"
+                            checkable
+                            :tree-data="treeData"
+                    ></a-tree>
+
+                </a-layout-content>
+            </a-layout>
+        </a-layout>
+    </a-config-provider>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<!-- vue http請求 -->
+<script src="https://cdn.jsdelivr.net/npm/axios@0.21.0/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
+<!-- 先引入 Vue -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ant-design-vue@1.7.2/dist/antd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ant-design-vue@1.7.2/dist/antd-with-locales.min.js"></script>
+
+<script>
+
+    const treeData = [
+        {
+            title: 't0-0',
+            key: '0-0',
+            children: [
+                {
+                    title: 't0-0-0',
+                    key: '0-0-0',
+                    children: [
+                        {title: '0-0-0-0', key: '0-0-0-0'},
+                        {title: '0-0-0-1', key: '0-0-0-1'},
+                        {title: '0-0-0-2', key: '0-0-0-2'},
+                    ],
+                },
+                {
+                    title: '0-0-1',
+                    key: '0-0-1',
+                    children: [
+                        {title: '0-0-1-0', key: '0-0-1-0'},
+                        {title: '0-0-1-1', key: '0-0-1-1'},
+                        {title: '0-0-1-2', key: '0-0-1-2'},
+                    ],
+                },
+                {
+                    title: '0-0-2',
+                    key: '0-0-2',
+                },
+            ],
+        },
+        {
+            title: '0-1',
+            key: '0-1',
+            children: [
+                {title: '0-1-0-0', key: '0-1-0-0'},
+                {title: '0-1-0-1', key: '0-1-0-1'},
+                {title: '0-1-0-2', key: '0-1-0-2'},
+            ],
+        },
+        {
+            title: '0-2',
+            key: '0-2',
+        },
+    ];
+
+    var vm = new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                locales: window.antd.locales,
+                collapsed: false,
+                autoExpandParent: true,
+                replaceFields: {
+                    key: 'child',
+                    title: 'name',
+                },
+                treeData,
+            }
+        },
+        watch: {
+            checkedKeys(val) {
+                console.log('监控 onCheck', val);
+            },
+        },
+        mounted() {
+        },
+        methods: {
+            onCheck(checkedKeys, info) {
+                console.log('onCheck', checkedKeys, info);
+            },
+        }
+    })
+
+</script>
+</html>

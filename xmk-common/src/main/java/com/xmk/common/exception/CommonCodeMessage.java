@@ -24,6 +24,8 @@ public enum CommonCodeMessage implements CodeMessageIdentity {
     VALIDATION_EXCEPTION("S0003", "参数错误，非空为空！"),
 
     BUSINESS_EXCEPTION("B0001", "业务异常!"),
+
+    BUSINESS_CUSTOM_EXCEPTION("B0002", "自定义业务异常-%s"),
     ;
 
 
