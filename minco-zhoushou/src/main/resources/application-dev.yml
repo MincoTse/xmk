@@ -1,0 +1,29 @@
+spring:
+  cache:
+    type: redis
+  redis:
+    database: 15
+    host: base-nonprod-slb-public.53zaixian.com
+    port: 30019
+    password: uTetAk8gOP3d
+
+qyx:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://sql-t01cn-rw.svc.53zaixian.com:3306/__db.name__?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=GMT%2B8
+    username: app_test
+    password: quWxRxYv1GzB%1iy
+  server:
+    type: service
+db:
+  name:
+    - db-name: member_center_0
+
+minco:
+  test:
+    map:
+      12344: 1
+      23123: 2
+      123213f: 3
+
+

@@ -1,0 +1,20 @@
+spring:
+  cache:
+    type: redis
+  redis:
+    database: 0
+    host: base-nonprod-slb-public.53zaixian.com
+    port: 30019
+    password: redis-test
+
+qyx:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/__db.name__?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=GMT%2B8
+    username: minco
+    password: Minco@123
+  server:
+    type: service
+db:
+  name:
+    - db-name: zhushou
