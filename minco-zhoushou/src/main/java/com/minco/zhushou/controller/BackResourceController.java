@@ -67,6 +67,11 @@ public class BackResourceController {
         return minco;
     }
 
+    @GetMapping("hello")
+    public String hello() {
+        return "hello world!";
+    }
+
     @GetMapping("addAdmin")
     public List<ResourceVO> giveResource(@RequestParam Long userId) {
         //获取权限id列表
