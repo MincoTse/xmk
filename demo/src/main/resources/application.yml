@@ -1,0 +1,32 @@
+server:
+  port: 8099
+
+spring:
+  profiles:
+    active: dev
+  cache:
+    type: redis
+  redis:
+    database: 0
+#    host: 127.0.0.1
+    host: 127.0.0.1
+    port: 6379
+    password: redis-test
+
+mybatis-plus:
+  type-aliases-package: com.example.demo.entity
+  mapper-locations: classpath*:mapper/*.xml
+  global-config:
+    db-config:
+      table-prefix: tse_
+qyx:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/__db.name__?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=GMT%2B8
+    username: root
+    password: Admin@123
+  server:
+    type: service
+db:
+  name:
+    - db-name: zhushou
