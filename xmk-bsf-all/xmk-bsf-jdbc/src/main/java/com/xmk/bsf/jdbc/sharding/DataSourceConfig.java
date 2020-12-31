@@ -6,7 +6,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.xmk.bsf.jdbc.constant.CommonConst;
 import com.xmk.bsf.jdbc.constant.NumberConst;
-import com.xmk.bsf.jdbc.sharding.datasource.DruidShardingDataSourceFactory;
 import com.xmk.bsf.jdbc.sharding.datasource.HikariShardingDataSourceFactory;
 import com.xmk.bsf.jdbc.sharding.datasource.ShardingDataSourceService;
 import com.xmk.bsf.jdbc.sharding.properties.AlgorithmProperties;
@@ -192,7 +191,6 @@ public class DataSourceConfig {
      * @param realDbName
      */
     private void createSingleDataSource(Map<String, DataSource> dataSourceMap, String realDbName) {
-
         dataSourceMap.put(realDbName, shardingDataSourceFactory.createDataSource(realDbName));
     }
 

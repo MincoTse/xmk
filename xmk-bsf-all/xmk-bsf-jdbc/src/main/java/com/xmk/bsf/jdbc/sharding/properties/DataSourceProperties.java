@@ -2,7 +2,7 @@ package com.xmk.bsf.jdbc.sharding.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -13,8 +13,9 @@ import java.util.List;
  * @author 明科
  * @create 2020/5/7 14:29
  */
+@Component
 @Data
-@PropertySource("classpath:config/application.yml")
+//@PropertySource("classpath*:config/application.yml")
 @ConfigurationProperties(prefix = "qyx.datasource")
 public class DataSourceProperties {
 
