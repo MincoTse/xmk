@@ -3,32 +3,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>xmk-bsf-parent</artifactId>
         <groupId>com.xmk.bsf</groupId>
+        <artifactId>xmk-bsf-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../xmk-bsf-all/xmk-bsf-parent/pom.xml</relativePath>
+        <relativePath/>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.xmk.common</groupId>
     <artifactId>xmk-common</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <name>xmk-common</name>
-    <!-- FIXME change it to the project's website -->
-    <url>http://www.example.com</url>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
 
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.11</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -52,6 +43,4 @@
         </dependency>
     </dependencies>
 
-    <build>
-    </build>
 </project>

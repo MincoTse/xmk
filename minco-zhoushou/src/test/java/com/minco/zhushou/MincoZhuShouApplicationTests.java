@@ -4,16 +4,11 @@ import com.google.common.base.Stopwatch;
 import com.minco.zhushou.entity.DbKeyWord;
 import com.minco.zhushou.service.DbKeyWordService;
 import lombok.extern.slf4j.Slf4j;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,22 +21,22 @@ class MincoZhuShouApplicationTests {
 
 	@Test
 	public void test1() throws IOException {
-		Stopwatch w = Stopwatch.createStarted();
-
-		Document doc = Jsoup.connect("https://dev.mysql.com/doc/refman/8.0/en/keywords.html").get();
-		Elements newsHeadlines = doc.select(".simplesect .itemizedlist .listitem");
-
-
-		List<DbKeyWord> result = new ArrayList<>();
-		for (Element headline : newsHeadlines) {
-			String nodeText = headline.text();
-			DbKeyWord dbKeyWord = new DbKeyWord().setKeyWord(nodeText).setLowKeyWord(nodeText.toLowerCase());
-			result.add(dbKeyWord);
-		}
-		dbKeyWordService.saveBatch(result);
-
-		log.info("执行耗时时间"+w.stop());
-		log.info("执行耗时时间"+w.elapsed());
+		//Stopwatch w = Stopwatch.createStarted();
+		//
+		//Document doc = Jsoup.connect("https://dev.mysql.com/doc/refman/8.0/en/keywords.html").get();
+		//Elements newsHeadlines = doc.select(".simplesect .itemizedlist .listitem");
+		//
+		//
+		//List<DbKeyWord> result = new ArrayList<>();
+		//for (Element headline : newsHeadlines) {
+		//	String nodeText = headline.text();
+		//	DbKeyWord dbKeyWord = new DbKeyWord().setKeyWord(nodeText).setLowKeyWord(nodeText.toLowerCase());
+		//	result.add(dbKeyWord);
+		//}
+		//dbKeyWordService.saveBatch(result);
+		//
+		//log.info("执行耗时时间"+w.stop());
+		//log.info("执行耗时时间"+w.elapsed());
 
 
 
