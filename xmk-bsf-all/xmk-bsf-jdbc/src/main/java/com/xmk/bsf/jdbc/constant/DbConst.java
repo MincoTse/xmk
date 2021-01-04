@@ -1,6 +1,5 @@
 package com.xmk.bsf.jdbc.constant;
 
-import lombok.experimental.NonFinal;
 
 /**
  * 〈一句话功能简述〉

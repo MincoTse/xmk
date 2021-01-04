@@ -8,6 +8,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+
 	<groupId>com.minco.zhushou</groupId>
 	<artifactId>minco-zhoushou</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -119,7 +120,8 @@
             <groupId>com.github.ben-manes.caffeine</groupId>
             <artifactId>caffeine</artifactId>
         </dependency>
-    </dependencies>
+
+	</dependencies>
 
 
 	<build>

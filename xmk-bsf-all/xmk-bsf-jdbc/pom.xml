@@ -3,8 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.xmk.bsf</groupId>
-        <artifactId>xmk-bsf-parent</artifactId>
+        <groupId>com.xmk.parent</groupId>
+        <artifactId>xmk-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
@@ -12,12 +12,11 @@
     <groupId>com.xmk.bsf</groupId>
     <artifactId>xmk-bsf-jdbc</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>xmk-bsf-jdbc</name>
-    <packaging>jar</packaging>
 
     <properties>
         <java.version>1.8</java.version>
     </properties>
+
     <dependencies>
         <!-- 引用sharding -->
         <dependency>
@@ -56,7 +55,10 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
-
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-autoconfigure</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -68,10 +70,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
-        </dependency>
+
 
     </dependencies>
 
